@@ -15,7 +15,7 @@ const WordCloud = () => {
     try {
       const { data } = await supabase
         .from('proposals')
-        .select('ai_keywords, subject, category')
+        .select('subject, category')
         .eq('status', 'published')
         .limit(100);
 
@@ -25,21 +25,16 @@ const WordCloud = () => {
       }
 
       const freq = {};
+      const STOP_WORDS = new Set(['cette', 'notre', 'leurs', 'pour', 'avec', 'dans', 'plus', 'aussi', 'comme', 'mais', 'dont', 'donc', 'ainsi', 'selon', 'vers', 'entre', 'chaque', 'toute', 'tous', 'autres', 'être', 'avoir', 'faire', 'quand', 'même', 'sans', 'sous', 'après', 'avant', 'depuis', 'lors', 'doit', 'très']);
 
       data.forEach(proposal => {
-        // AI keywords
-        (proposal.ai_keywords || []).forEach(kw => {
-          const k = kw.toLowerCase().trim();
-          freq[k] = (freq[k] || 0) + 3;
-        });
-
-        // Subject words
+        // Extract keywords from subject text
         if (proposal.subject) {
           proposal.subject
             .toLowerCase()
             .replace(/[^a-zàâäéèêëîïôùûüç\s]/g, ' ')
             .split(/\s+/)
-            .filter(w => w.length > 4 && !['cette', 'notre', 'leurs', 'pour', 'avec', 'dans', 'plus', 'aussi', 'comme', 'mais'].includes(w))
+            .filter(w => w.length > 4 && !STOP_WORDS.has(w))
             .forEach(w => { freq[w] = (freq[w] || 0) + 1; });
         }
       });

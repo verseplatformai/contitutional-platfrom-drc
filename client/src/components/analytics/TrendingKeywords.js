@@ -12,10 +12,10 @@ const TrendingKeywords = () => {
 
   const fetchTrendingKeywords = async () => {
     try {
-      // Fetch recent proposals with AI keywords
+      // Fetch recent proposals and extract keywords from subject text
       const { data } = await supabase
         .from('proposals')
-        .select('ai_keywords, subject, created_at')
+        .select('subject, created_at')
         .eq('status', 'published')
         .order('created_at', { ascending: false })
         .limit(50);
@@ -30,30 +30,20 @@ const TrendingKeywords = () => {
       const recentKeywordCount = {};
       const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
+      const STOP_WORDS = new Set(['cette', 'notre', 'leurs', 'pour', 'avec', 'dans', 'plus', 'très', 'aussi', 'comme', 'mais', 'donc', 'ainsi', 'selon', 'vers', 'entre', 'chaque', 'toute', 'tous', 'autres', 'être', 'avoir', 'faire', 'quand', 'dont', 'même', 'sans', 'sous', 'après', 'avant', 'depuis', 'lors', 'doit', 'doit']);
       data.forEach(proposal => {
         const isRecent = new Date(proposal.created_at) > oneWeekAgo;
-        const keywords = proposal.ai_keywords || [];
-        keywords.forEach(kw => {
-          const normalized = kw.toLowerCase().trim();
-          keywordCount[normalized] = (keywordCount[normalized] || 0) + 1;
-          if (isRecent) {
-            recentKeywordCount[normalized] = (recentKeywordCount[normalized] || 0) + 1;
-          }
-        });
-
-        // Also extract from subject line
+        // Extract keywords from subject text
         if (proposal.subject) {
           const words = proposal.subject
             .toLowerCase()
             .replace(/[^a-zàâäéèêëîïôùûüç\s-]/g, ' ')
             .split(/\s+/)
-            .filter(w => w.length > 4);
+            .filter(w => w.length > 4 && !STOP_WORDS.has(w));
           words.forEach(word => {
-            if (!['cette', 'notre', 'leurs', 'leurs', 'pour', 'avec', 'dans', 'plus', 'très'].includes(word)) {
-              keywordCount[word] = (keywordCount[word] || 0) + 0.5;
-              if (isRecent) {
-                recentKeywordCount[word] = (recentKeywordCount[word] || 0) + 0.5;
-              }
+            keywordCount[word] = (keywordCount[word] || 0) + 1;
+            if (isRecent) {
+              recentKeywordCount[word] = (recentKeywordCount[word] || 0) + 1;
             }
           });
         }

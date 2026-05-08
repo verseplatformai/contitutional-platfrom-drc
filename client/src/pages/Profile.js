@@ -2,6 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { supabase } from '../config/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import { formatDistanceToNow } from 'date-fns';
@@ -119,12 +120,14 @@ const Profile = () => {
 
       if (error) throw error;
 
+      toast.success('Profil mis à jour avec succès !');
       setEditSuccess('Profil mis à jour avec succès !');
       setEditing(false);
       setNewPortrait(null);
       setPortraitPreview(null);
       setTimeout(() => setEditSuccess(''), 3000);
     } catch (err) {
+      toast.error('Erreur lors de la mise à jour : ' + err.message);
       setEditError('Erreur lors de la mise à jour : ' + err.message);
     } finally {
       setEditLoading(false);

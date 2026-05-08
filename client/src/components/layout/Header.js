@@ -85,11 +85,11 @@ const Header = () => {
               >
                 <img 
                   src={profile?.portrait_url || '/images/default-avatar.png'} 
-                  alt="Profile" 
+                  alt="Profil" 
                   className="avatar-sm avatar-image"
-                  style={{ marginRight: '0.5rem' }}
+                  style={{ marginRight: '0.5rem', width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,215,0,0.6)' }}
                 />
-                {profile?.first_name}
+                {profile?.first_name || t('nav.profile')}
               </NavLink>
               
               <button 

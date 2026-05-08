@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { supabase } from '../../config/supabase';
 
 const VoteButtons = ({ proposalId, yesCount, noCount, userId, onVoteUpdate }) => {
@@ -34,8 +35,7 @@ const VoteButtons = ({ proposalId, yesCount, noCount, userId, onVoteUpdate }) =>
 
   const handleVoteClick = (voteType) => {
     if (userVote) {
-      // Already voted - show message
-      alert(`Vous avez déjà voté ${userVote === 'yes' ? 'OUI' : 'NON'} sur cette proposition.`);
+      toast(`Vous avez déjà voté ${userVote === 'yes' ? 'OUI ✅' : 'NON ❌'} sur cette proposition.`, { icon: 'ℹ️' });
       return;
     }
 
@@ -74,12 +74,11 @@ const VoteButtons = ({ proposalId, yesCount, noCount, userId, onVoteUpdate }) =>
       // 3. Update local state
       setUserVote(pendingVote);
       onVoteUpdate(proposalId, pendingVote);
-
-      // 4. Show success animation
+      toast.success(`Vote ${pendingVote === 'yes' ? 'OUI ✅' : 'NON ❌'} confirmé avec succès !`);
       setIsVoting(false);
     } catch (error) {
-      console.error('Vote error:', error);
-      alert('Erreur lors du vote. Veuillez réessayer.');
+      console.error('Erreur vote:', error);
+      toast.error('Erreur lors du vote. Veuillez réessayer.');
       setIsVoting(false);
     }
   };

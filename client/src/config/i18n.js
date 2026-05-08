@@ -100,6 +100,26 @@ const resources = {
       'form.errors.content': 'Le contenu détaillé doit contenir au moins 50 caractères',
       'form.errors.terms': 'Vous devez accepter les conditions de soumission',
       
+      // Auth shared keys (used in Login and Register)
+      'auth.firstName': 'Prénom',
+      'auth.lastName': 'Nom',
+      'auth.email': 'Adresse email',
+      'auth.password': 'Mot de passe',
+      'auth.age': 'Tranche d\'âge',
+      'auth.profession': 'Profession',
+      'auth.phone': 'Numéro de téléphone',
+      'auth.province': 'Province de résidence',
+      'auth.diaspora': 'Je vis en dehors de la RDC (diaspora)',
+      'auth.terms': 'J\'accepte les conditions d\'utilisation et la politique de confidentialité',
+      
+      // Proposal form (aliases for direct t('proposals.*') calls in SubmitProposal)
+      'proposals.subject': 'Objet de votre proposition',
+      'proposals.summary': 'Votre proposition en une phrase',
+      'proposals.content': 'Votre proposition détaillée',
+      
+      // Statistics page title
+      'stats.title': 'Statistiques Nationales',
+      
       // Registration
       'register.title': 'Créer un compte',
       'register.subtitle': 'Rejoignez la plateforme citoyenne pour la réforme constitutionnelle',

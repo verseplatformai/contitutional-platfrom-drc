@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
@@ -36,12 +37,16 @@ const Login = () => {
       const result = await login(formData.email, formData.password);
 
       if (result.success) {
+        toast.success('Connexion réussie ! Bienvenue sur MAONI.');
         navigate('/');
       } else {
-        setError(result.error || 'Email ou mot de passe incorrect');
+        const msg = result.error || 'Email ou mot de passe incorrect';
+        setError(msg);
+        toast.error(msg);
       }
     } catch (err) {
       setError('Erreur de connexion. Veuillez réessayer.');
+      toast.error('Erreur de connexion. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
     }
