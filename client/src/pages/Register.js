@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 import { useAuth } from '../contexts/AuthContext';
 
 const PROVINCES = [
@@ -136,12 +137,16 @@ const Register = () => {
       const result = await register(formData);
 
       if (result.success) {
+        toast.success('Inscription réussie ! Bienvenue dans la communauté MAONI.');
         navigate('/');
       } else {
-        setSubmitError(result.error || 'Une erreur est survenue lors de l\'inscription');
+        const msg = result.error || 'Une erreur est survenue lors de l\'inscription';
+        setSubmitError(msg);
+        toast.error(msg);
       }
     } catch (error) {
       setSubmitError('Erreur de connexion. Veuillez réessayer.');
+      toast.error('Erreur de connexion. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
     }

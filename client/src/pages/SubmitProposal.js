@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
+import toast from 'react-hot-toast';
 import { supabase } from '../config/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import ReactQuill from 'react-quill';
@@ -190,11 +191,13 @@ const SubmitProposal = () => {
 
       if (dbError) throw dbError;
 
-      // 4. Redirect to the new proposal
+      toast.success('Proposition soumise avec succès ! Elle est maintenant en ligne.');
       navigate(`/proposals/${proposal.id}`);
     } catch (error) {
-      console.error('Error submitting proposal:', error);
-      setSubmitError(error.message || 'Une erreur est survenue lors de la soumission');
+      console.error('Erreur soumission proposition:', error);
+      const msg = error.message || 'Une erreur est survenue lors de la soumission';
+      setSubmitError(msg);
+      toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }
