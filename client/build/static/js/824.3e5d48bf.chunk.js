@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunkmaoni_100_constitutional_reform=globalThis.webpackChunkmaoni_100_constitutional_reform||[]).push([[824],{1824(e,i,n){n.r(i),n.d(i,{default:()=>t});n(5043);var r=n(579);const t=()=>(0,r.jsxs)("div",{style:{textAlign:"center",padding:"3rem"},children:[(0,r.jsx)("h1",{children:"\ud83d\udce1 Mode Hors Ligne"}),(0,r.jsx)("p",{children:"Veuillez v\xe9rifier votre connexion internet."})]})}}]);
+//# sourceMappingURL=824.3e5d48bf.chunk.js.map

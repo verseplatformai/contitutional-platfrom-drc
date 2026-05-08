@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAONI - Mode Hors Ligne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0D47A1 0%, #0A3D8F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .offline-container {
+            max-width: 500px;
+        }
+        
+        .offline-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .offline-actions {
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: #FFD700;
+            color: #0D47A1;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: #FFEB3B;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: #0D47A1;
+        }
+        
+        .offline-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .offline-feature {
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .offline-feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .offline-feature-text {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 480px) {
+            .offline-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <img src="/images/logo-drc-map.png" alt="MAONI" class="offline-logo">
+        
+        <div class="offline-icon">📡</div>
+        
+        <h1>Mode Hors Ligne</h1>
+        
+        <p>
+            Vous n'êtes pas connecté à Internet. 
+            MAONI fonctionne en mode hors ligne limité. 
+            Vos actions seront synchronisées automatiquement dès que vous serez reconnecté.
+        </p>
+        
+        <div class="offline-features">
+            <div class="offline-feature">
+                <div class="offline-feature-icon">📖</div>
+                <div class="offline-feature-text">
+                    Consultez les propositions sauvegardées
+                </div>
+            </div>
+            <div class="offline-feature">
+                <div class="offline-feature-icon">✍️</div>
+                <div class="offline-feature-text">
+                    Rédigez des propositions hors ligne
+                </div>
+            </div>
+            <div class="offline-feature">
+                <div class="offline-feature-icon">🔄</div>
+                <div class="offline-feature-text">
+                    Synchronisation automatique
+                </div>
+            </div>
+        </div>
+        
+        <div class="offline-actions">
+            <button class="btn" onclick="window.location.reload()">
+                🔄 Réessayer
+            </button>
+            <button class="btn btn-outline" onclick="window.history.back()">
+                ← Retour
+            </button>
+        </div>
+        
+        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.6;">
+            🇨🇩 MAONI v100.04 | Made in DRC<br>
+            Composez *123# pour participer sans Internet
+        </p>
+    </div>
+    
+    <script>
+        // Check connection and reload when back online
+        window.addEventListener('online', () => {
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>

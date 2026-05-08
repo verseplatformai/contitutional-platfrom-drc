@@ -1,0 +1,2 @@
+"use strict";(globalThis.webpackChunkmaoni_100_constitutional_reform=globalThis.webpackChunkmaoni_100_constitutional_reform||[]).push([[437],{5437(e,i,s){s.r(i),s.d(i,{default:()=>t});s(5043);var a=s(579);const t=()=>(0,a.jsxs)("div",{className:"container",style:{padding:"2rem"},children:[(0,a.jsx)("h1",{children:"Tableau de Bord Pr\xe9sidentiel"}),(0,a.jsx)("p",{children:"Statistiques r\xe9serv\xe9es au d\xe9partement pr\xe9sidentiel."})]})}}]);
+//# sourceMappingURL=437.3e416cf3.chunk.js.map

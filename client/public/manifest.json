@@ -1,0 +1,29 @@
+{
+  "short_name": "MAONI",
+  "name": "MAONI - Réforme Constitutionnelle RDC v100.04",
+  "icons": [
+    {
+      "src": "/images/logo-drc-map.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo-drc-map.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/logo-drc-map.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0D47A1",
+  "background_color": "#FFFFFF",
+  "orientation": "any",
+  "lang": "fr-CD",
+  "description": "Plateforme nationale de consultation citoyenne sur les réformes constitutionnelles en RDC",
+  "categories": ["government", "news", "social"]
+}
