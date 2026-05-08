@@ -101,10 +101,24 @@ export const AuthProvider = ({ children }) => {
     setProfile(null);
   };
 
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
   const value = {
     user, profile, loading,
     register, login, logout,
-    isAuthenticated: !!user
+    isAuthenticated: !!user,
+    isOffline
   };
 
   return React.createElement(AuthContext.Provider, { value: value }, children);

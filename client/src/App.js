@@ -11,10 +11,11 @@ const Proposals = lazy(() => import('./pages/Proposals'));
 const ProposalDetail = lazy(() => import('./pages/ProposalDetail'));
 const SubmitProposal = lazy(() => import('./pages/SubmitProposal'));
 const Statistics = lazy(() => import('./pages/Statistics'));
-const PresidentialDashboard = lazy(() => import('./pages/PresidentialDashboard'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Profile = lazy(() => import('./pages/Profile'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Privacy = lazy(() => import('./pages/Privacy'));
 const Offline = lazy(() => import('./pages/Offline'));
 
 // Loading component
@@ -23,10 +24,12 @@ const PageLoader = () => (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: '60vh'
+    minHeight: '60vh',
+    flexDirection: 'column',
+    gap: '1rem'
   }}>
     <div className="loading-spinner" />
-    <p style={{ marginLeft: '1rem', color: 'var(--drc-blue)' }}>
+    <p style={{ color: 'var(--drc-blue)', fontWeight: 500 }}>
       Chargement...
     </p>
   </div>
@@ -35,13 +38,13 @@ const PageLoader = () => (
 // Protected Route component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
-  
+
   if (loading) return <PageLoader />;
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return children;
 };
 
@@ -60,7 +63,7 @@ function App() {
   return (
     <div className="app">
       <Header />
-      
+
       <main className="main-content">
         <AnimatePresence mode="wait">
           <Suspense fallback={<PageLoader />}>
@@ -72,7 +75,9 @@ function App() {
               <Route path="/statistics" element={<Statistics />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+
               {/* Protected Routes */}
               <Route path="/submit-proposal" element={
                 <ProtectedRoute>
@@ -84,19 +89,14 @@ function App() {
                   <Profile />
                 </ProtectedRoute>
               } />
-              <Route path="/dashboard" element={
-                <ProtectedRoute>
-                  <PresidentialDashboard />
-                </ProtectedRoute>
-              } />
-              
+
               {/* Fallback */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
         </AnimatePresence>
       </main>
-      
+
       <Footer />
     </div>
   );
